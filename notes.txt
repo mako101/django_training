@@ -1,0 +1,48 @@
+
+
+reseaech model view controller
+
+read:
+
+https://docs.djangoproject.com/en/1.10/topics/http/urls/
+
+
+# sync DB
+./manage.py migrate --run-syncdb
+
+
+#  console:
+./manage shell
+
+import django
+
+django.setup()
+
+from polls.models import Question, Choice
+
+Question.objects.all()
+
+
+
+
+
+
+# timezone
+
+from django.utils import timezone
+
+##########################################################################
+
+################### SQLite browser
+http://sqlitebrowser.org/
+
+
+################### Get Django to wrk with python3
+    -> fixed the errors!
+
+sudo pip3 install django
+ -> change the interpreter to Python 3 -> all good!
+
+
+
+
