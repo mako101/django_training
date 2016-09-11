@@ -46,3 +46,35 @@ sudo pip3 install django
 
 
 
+
+###################################################  HOMEWORK  #######################################################
+
+extend the polls app, in any way I like
+
+
+- new project
+
+- new app -> music store
+- set up views, urls etc
+
+Optional:
+    show song name, picture
+    allow user to save
+    set up template
+    upload a file if I can
+    allow user to reg with email notification?
+    user management?
+
+
+- add album, artist, song -> primary
+
+to read:
+
+https://docs.djangoproject.com/en/1.10/ -> file uploads
+
+https://docs.djangoproject.com/en/1.10/topics/templates/
+
+
+
+
+email: maddymaster@gmail.com - let him know what I've done
