@@ -1,20 +1,54 @@
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
+
+from django.template import loader, RequestContext
+from django.shortcuts import render, get_object_or_404
+from django.core.urlresolvers import reverse
 from .models import Question
 # Create your views here.
 
 def index(request):
     latest_questions = Question.objects.order_by('-pub_date')[:5]
-    welcome_msg = '<h3>Welcome to the polls app!</h3><h5>Here are the latest questions:</h5>'
-    output = '<br>'.join(q.question_text for q in latest_questions)
+
+
+    # The short version!
+    context = {'latest_questions': latest_questions}
+    return render(request, 'polls/index.html', context)
+
+    # The long version!!
+    # template = loader.get_template('polls/index.html')
+    # context = RequestContext(request, {
+    #     'latest_questions': latest_questions
+    # })
+    # return HttpResponse(template.render(context)
+
+
+    # Playing around
+    # welcome_msg = '<h3>Welcome to the polls app!</h3><h5>Here are the latest questions:</h5>'
+    # output = '<br>'.join(q.question_text for q in latest_questions)
     # return HttpResponse('<h1>Hello and welcome. You\'re at the polls index.<h1>')
-    return HttpResponse(welcome_msg + output)
+
 
 def detail(request, question_id):
-    return HttpResponse('This is the detail view of the question is: %s' % question_id)
+    question = get_object_or_404(Question, pk = question_id)
+    return render(request, 'polls/detail.html', {'question':question})
 
 
 def results(request, question_id):
-    return HttpResponse('These are the results of the questions: %s' % question_id)
+    question = get_object_or_404(Question, pk=question_id)
+    return render(request, 'polls/results.html', {'question':question})
 
-def votes(request, question_id):
-    return HttpResponse('The vote on question is: %s' % question_id)
+
+def vote(request, question_id):
+    question = get_object_or_404(Question, pk=question_id)
+
+    try:
+        selected_choice = question.choice_set.get(pk = request.POST['choice'])
+    except:
+            return render(request, 'polls/detail.html', {'question': question, 'error_message': 'Please select one of the avialble choices'})
+    else:
+        selected_choice.votes += 1
+        selected_choice.save()
+
+    # must have a comma if you pass just one argument
+    return HttpResponseRedirect(reverse('polls:results', args=(question.id,)))
+
