@@ -5,9 +5,16 @@
 {% if latest_questions %}
     <ul>
         {% for question in latest_questions %}
-        <!-- <li><a href="/polls/{{ question.id }}"><b>{{ question.question_text}}</b></a> </li> -->
-        <!--  polls:details - is referring to details in the polls namespace -> this is in mysites/urls -->
+        <!-- here is a basic hard-coded version
+        <li><a href="/polls/{{ question.id }}"><b>{{ question.question_text}}</b></a> </li> -->
+
+
+        <!-- Here we call the URL by referring to its name specified in  polls/urls.py
+        In other words we are calling the detail url fro the polls namespace -->
+
         <li><a href = {% url "polls:detail" question.id %}><b>{{ question.question_text}}</b></a> </li>
+
+        <p> random comment! </p>
         {% endfor %}
     </ul>
 {% else %}

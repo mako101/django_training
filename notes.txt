@@ -49,7 +49,10 @@ sudo pip3 install django
 
 ###################################################  HOMEWORK  #######################################################
 
-extend the polls app, in any way I like
+extend the mysite projects / polls app, in any way I like
+- Add a root page that will give the listing of available apps or offer to enter the admin area
+- create forms with different types of input! -> in the survey app
+http://www.w3schools.com/tags/tag_input.asp
 
 
 - new project
