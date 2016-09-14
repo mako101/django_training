@@ -3,6 +3,9 @@ from django.conf.urls import url
 # . means current directory
 from . import views
 
+# Have to be careful with app_name, this allows to change the app's namespace!
+# It also doesn't seem to be needed? -> Check with Maddy
+#app_name = 'surveys'
 app_name = 'polls'
 
 urlpatterns = [
@@ -20,7 +23,7 @@ urlpatterns = [
     # 127.0.0.1/polls/1/results
     url(r'^(?P<question_id>[0-9]+)/results$', views.results, name='results'),
 
-    # 127.0.0.1/polls/1/votes
+    # 127.0.0.1/polls/1/vote
     url(r'^(?P<question_id>[0-9]+)/vote$', views.vote, name='vote'),
         ]
 

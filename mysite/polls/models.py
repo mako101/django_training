@@ -1,6 +1,6 @@
-#from __future__ import unicode_literals
-
 from django.db import models
+import datetime
+from django.utils import timezone
 
 
 # Create your models here.
@@ -11,6 +11,9 @@ class Question(models.Model):
     def __str__(self):
         return self.question_text
 
+    def recently_added(self):
+            return self.pub_date >= timezone.now() - datetime.timedelta(days=1)
+
 
 class Choice(models.Model):
     choice_text = models.CharField(max_length=200)
@@ -19,4 +22,10 @@ class Choice(models.Model):
 
     def __str__(self):
         return self.choice_text
+
+    def is_polular(self):
+        return self.votes >= 5
+
+
+
 

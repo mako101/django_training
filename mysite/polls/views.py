@@ -9,6 +9,11 @@ from .models import Question
 def index(request):
     latest_questions = Question.objects.order_by('pub_date')[:5]
 
+    # The short version! - using the 'render'shortcut
+    context = {'latest_questions': latest_questions}
+    # here is the right order of arguments for the render function
+    return render(request, 'polls/index.html', context)
+
     # # The long version!!
     # template = loader.get_template('polls/index.html')
     # context = {
@@ -16,16 +21,10 @@ def index(request):
     # }
     # return HttpResponse(template.render(context, request))
 
-    # The short version! - using the 'render'shortcut
-    context = {'latest_questions': latest_questions}
-    # here is the right order of arguments for the render function
-    return render(request, 'polls/index.html', context)
-
     # Playing around
     # welcome_msg = '<h3>Welcome to the polls app!</h3><h5>Here are the latest questions:</h5>'
     # output = '<br>'.join(q.question_text for q in latest_questions)
     # return HttpResponse('<h1>Hello and welcome. You\'re at the polls index.<h1>')
-
 
 def detail(request, question_id):
     try:
@@ -44,12 +43,18 @@ def vote(request, question_id):
     question = get_object_or_404(Question, pk=question_id)
 
     try:
-        selected_choice = question.choice_set.get(pk = request.POST['choice'])
+        # request.POST is a dictionary-like object that lets you access submitted data by key name
+        # this will return the ID of the selected choice as a string
+        selected_choice = question.choice_set.get(pk=request.POST['choice'])
     except:
             return render(request, 'polls/detail.html', {'question': question, 'error_message': 'Please select one of the available choices'})
     else:
         selected_choice.votes += 1
         selected_choice.save()
+
+    # Always return an HttpResponseRedirect after successfully dealing
+    # with POST data. This prevents data from being posted twice if a
+    # user hits the Back button.
 
     # must have a comma if you pass just one argument
     return HttpResponseRedirect(reverse('polls:results', args=(question.id,)))
