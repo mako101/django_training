@@ -1,0 +1,9 @@
+
+
+
+Browse page:
+
+ - display all songs
+ - display songs by genre
+ - display songs by category
+ - user rating?

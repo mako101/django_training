@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Music Store Portal</title>
+</head>
+<body>
+    <h1>Welcome to the Music Store</h1>
+
+    <p> Please select one of the options below:</p>
+
+    <h3>Applications</h3>
+        <ul>
+            <li><a href="{% url 'musicstore:upload' %}"><h4>Upload a new Song</h4></a></li>
+            <li><a href="{% url 'musicstore:browse' %}"><h4>Browse available songs</h4></a></li>
+        </ul>
+    <br>
+    <br>
+{#    <a href="/admin"><h3>Admin Area</h3></a>#}
+
+</body>
+</html>

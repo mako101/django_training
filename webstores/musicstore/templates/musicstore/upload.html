@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Upload Page</title>
+</head>
+<body>
+    <hr>
+        <h1>Upload A New Song</h1>
+        <p> Please fill in all the fields below and click Sumbit</p>
+    <hr>
+    {% if error_message %} <p><strong>{{ error_message }} </strong></p> {% endif%}
+
+    <form action = "/music/submit" method="post">
+        {% csrf_token %}
+        <h4>Basic Info</h4>
+        <label class="required" for="id_title">Title:</label> <input id="id_title" type="text" name="title" required />
+        <br>
+        <label class="required" for="id_artist">Artist:</label> <input id="id_artist" type="text" name="artist" required />
+        <br>
+        Album: <input type="text" name="album" />
+        <br>
+
+        <div>
+            <h4>Genre:</h4>
+
+            {% for genre in genres %}
+                <input type="radio" name="genre" id="genre{{ forloop.counter }}" value = "{{ genre.id }}"/>
+                <label for="genre{{ forloop.counter }}">{{ genre.name }}</label>
+                <br>
+            {% endfor %}
+        </div>
+
+        <div>
+            <h4>Optional Categories:</h4>
+
+            {% for category in categories %}
+                <input type="checkbox" name="{{ forloop.counter }}" value="{{ category.id }}">{{ category.name }}
+                <br>
+            {% endfor %}
+        </div>
+        <div>
+            <h4>Description (Optional):</h4>
+            <p>200 characters max</p>
+            <textarea rows="4" cols="25" maxlength="200"
+                      placeholder="Add the description here ...">
+            </textarea>
+        </div>
+{#        <div>#}
+            <h3>Please Choose the File to Upload</h3>
+            <label class="required" for="id_file">Select a file:</label>
+            <input id="id_file" type="file" name="song" required />
+            <br><br>
+            <input type="submit" value="Upload">
+{#        </div>#}
+
+    </form>
+</body>
+</html>
