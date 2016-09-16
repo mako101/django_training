@@ -11,7 +11,7 @@
     <hr>
     {% if error_message %} <p><strong>{{ error_message }} </strong></p> {% endif%}
 
-    <form action = "/music/submit" method="post">
+    <form action = "{% url 'musicstore:submit' %}" method="post">
         {% csrf_token %}
         <h4>Basic Info</h4>
         <label class="required" for="id_title">Title:</label> <input id="id_title" type="text" name="title" required />

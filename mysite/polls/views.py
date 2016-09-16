@@ -26,6 +26,7 @@ def index(request):
     # output = '<br>'.join(q.question_text for q in latest_questions)
     # return HttpResponse('<h1>Hello and welcome. You\'re at the polls index.<h1>')
 
+
 def detail(request, question_id):
     try:
         question = Question.objects.get(pk=question_id)

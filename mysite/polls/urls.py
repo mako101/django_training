@@ -10,7 +10,7 @@ app_name = 'polls'
 
 urlpatterns = [
     # 127.0.0.1/polls
-    url('^$', views.index, name='index'),
+    url(r'^$', views.index, name='index'),
 
     # 127.0.0.1/polls/1
     url(r'^(?P<question_id>[0-9]+)/$', views.detail, name='detail'),
