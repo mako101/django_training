@@ -2,7 +2,7 @@
 
 {% block main_content %}
 
-<h1>{{question.question_text}}</h1>
+<h2>{{question.question_text}}</h2>
 
     {% if error_message %} <p><strong>{{ error_message }} </strong></p> {% endif%}
 
@@ -12,9 +12,10 @@
             <input type="radio" name="choice" id="choice{{forloop.counter}}" value = "{{choice.id}}"/>
             <label for="choice{{forloop.counter}}">{{choice.choice_text}}</label> <br>
     {% endfor %}
-    <input type="submit" value="vote"/>
+    <input type="submit" class = "btn btn-success" value="vote"/>
 
     </form>
+    <a href="{% url 'polls:index' %}"> <<<= Back to Questions</a>
 
 {% endblock %}
 <!--
